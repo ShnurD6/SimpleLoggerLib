@@ -2,7 +2,7 @@
 
           -[ Simple Logger Lib ]-
 
-                version 0.1
+                version 0.2
 
   https://github.com/ShnurD6/SimpleLoggerLib
 
@@ -38,16 +38,18 @@ struct Logger
 private:
 
     static constexpr auto mTargetEnvVar = "SWS_LOG_TARGET";
+    static constexpr auto mFileNameEnvVar = "SWS_LOG_FILENAME";
 
     enum class Target
     {
-        File,        ///< Logging to a file log.txt
+        File,        ///< Logging to a file from var SWS_LOG_FILENAME (default = log.txt)
         OutputStream ///< Logging to std::cout/std::cerr
     };
 
     Target mTarget{Target::File};
+    std::string mFileName{"log.txt"};
 
-    void SetTargetFromEnv();
+    void SetVarsFromEnv();
 
     std::fstream mLogFile;
 };

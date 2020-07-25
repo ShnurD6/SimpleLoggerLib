@@ -47,7 +47,7 @@ void LoggerInstance::ErrorLog(const std::string &aNewLog) const
 
 Logger::Logger()
 {
-    SetTargetFromEnv();
+    SetVarsFromEnv();
 
     bool needLineBreak = mTarget == Target::File;
 
@@ -58,7 +58,7 @@ Logger::Logger()
     switch (mTarget)
     {
         case Target::File:
-            mLogFile.open("log.txt", std::fstream::app);
+            mLogFile.open(mFileName, std::fstream::app);
             mLogFile << initialLog;
             break;
         case Target::OutputStream:
@@ -85,15 +85,19 @@ Logger::~Logger()
     }
 }
 
-void Logger::SetTargetFromEnv()
+void Logger::SetVarsFromEnv()
 {
     const auto targetStr = std::getenv(mTargetEnvVar);
+    const auto fileNameStr = std::getenv(mFileNameEnvVar);
 
-    if (!targetStr)
-        return;
+    if (fileNameStr)
+        mFileName = fileNameStr;
 
-    if (targetStr == "File"s)
-        mTarget = Target::File;
-    else if (targetStr == "OutputStream"s)
-        mTarget = Target::OutputStream;
+    if (targetStr)
+    {
+        if (targetStr == "File"s)
+            mTarget = Target::File;
+        else if (targetStr == "OutputStream"s)
+            mTarget = Target::OutputStream;
+    }
 }

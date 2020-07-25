@@ -14,6 +14,8 @@
 add_subdirectory(Sources/Logger)
 target_link_libraries(*название_вашего_проекта* Logger)
 ````` 
+Пример проекта, использующего библиотеку [тут](https://github.com/ShnurD6/smart-weather-service/).
+
 Внимание! Используется библиотека boost. Если у вас её нет - необходимо установить [по ссылке](https://www.boost.org/users/download/), или из своего пакетного менеджера `libboost-system-dev` и `libboost-date-time-dev`
 
 ---
@@ -34,6 +36,6 @@ target_link_libraries(*название_вашего_проекта* Logger)
 
 | Переменная          | Значения             | По умолчанию |
 | ------------------- | :------------------: | :----------: |
-| $SWS_LOG_TARGET | `File` (Логгирует в файл log.txt), <br> `OutputStream` (выводит логи в cout/cerr) | `File` |
-
+| $SWS_LOG_TARGET     | `File` (Логгирует в файл), <br> `OutputStream` (выводит логи в cout/cerr) | `File` |
+| $SWS_LOG_FILENAME   | Название файла для записи лога | log.txt | 
 --- 
